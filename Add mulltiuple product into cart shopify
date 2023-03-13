@@ -1,0 +1,30 @@
+$(document).on("click","button.btn.product-form__cart-submit.btn" ,function(e){
+e.preventDefault();
+var defaultid = $('select#ProductSelect-product-template option:selected').attr('value');
+//console.log(default_ids);
+jsonObj = [];
+$(".Bundle_product input:checked").each(function(){
+var total_ids = $(this).parents(".Bundle_product").attr("product_id");
+//console.log(total_ids);
+item = {}
+item ["id"] = parseInt(total_ids);
+item ["quantity"] =1;
+jsonObj.push(item);
+
+});
+$.ajax({
+type: 'POST',
+url: '/cart/add.js',
+dataType: 'json',
+data: { quantity: 1 , id: defaultid },
+success: function(){
+
+jQuery.post('/cart/add.js', {
+items: jsonObj,
+success: function(data) {
+console.log("SUCCESSFULLY ADDED BUNDLE PRODUCTS");
+}
+});
+}
+});
+});
