@@ -28,3 +28,21 @@ console.log("SUCCESSFULLY ADDED BUNDLE PRODUCTS");
 }
 });
 });
+
+
+//change cart counting on header
+
+// change number on header cart
+      setTimeout(function() {
+        $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/cart.js',
+                success: function(cart){
+                 var count = (cart.item_count); 
+                   console.log(count);
+                  $('.cart-count-bubble span').html(count);
+                }
+            });
+        }, 1000);
+        // end change number on header cart.
